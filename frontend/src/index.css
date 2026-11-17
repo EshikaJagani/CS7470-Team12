@@ -1,0 +1,77 @@
+/* MotionQuest theme - made by Jason */
+/* colors we use everywhere */
+:root {
+  --dark-blue: #1f2a44;
+  --gold: #f2b544;
+  --cream: #fff8ec;
+  --green: #4caf50;
+  --text: #222222;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--cream);
+  color: var(--text);
+}
+/* top bar */
+.header {
+  background-color: var(--dark-blue);
+  color: white;
+  padding: 12px 16px;
+}
+.title {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+}
+.nav button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  margin-right: 6px;
+}
+/* the middle of the page */
+.main {
+  padding: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+/* all buttons */
+button {
+  background-color: var(--gold);
+  color: var(--dark-blue);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 4px;
+}
+button:hover {
+  opacity: 0.85;
+}
+button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
+}
+/* a white box with rounded corners */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+/* green text for good news */
+.success {
+  color: var(--green);
+  font-weight: bold;
+}
+/* bottom bar */
+.footer {
+  text-align: center;
+  padding: 16px;
+  color: #777777;
+  font-size: 14px;
+}

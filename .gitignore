@@ -1,0 +1,21 @@
+# website
+node_modules/
+dist/
+.env.local
+
+
+
+# python
+.venv/
+# venv/
+__pycache__/
+
+
+
+# big data files (Rohan, we need to download this individually)
+ml/data/
+
+
+# computer junk
+.DS_Store
+Thumbs.db
