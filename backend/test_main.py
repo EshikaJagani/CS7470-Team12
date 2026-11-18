@@ -2,7 +2,7 @@
 # Run them from the backend folder: pytest
 
 from fastapi.testclient import TestClient
-from main import app
+from backend.main import app
 
 # a pretend browser that talks to our server without starting it
 client = TestClient(app)
