@@ -67,3 +67,11 @@ button:disabled {
   color: #777777;
   font-size: 14px;
 }
+
+
+/* big number for the step counter n the record countdown */
+.big-number {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 8px 0;
+}

@@ -1,8 +1,10 @@
 // SensorsPage - made by Eshika
 // uploading the original unclean version with refs
+// now adding step counter
 // shows live nos from all the sensors plus how many reading will come every sec just like sampling rate like task 1
 import { useEffect, useRef, useState } from 'react'
 import { askForSensorPermission, startSensors } from '../sensors.js'
+import { addReading, createStepCounter } from '../stepCounter.js'
 
 // just to show numbers with 1 digit after dot like 9.8 else its too long to read on phone..
 function show(num) {
@@ -15,11 +17,16 @@ function SensorsPage() {
   const [reading, setReading] = useState(null)
   const [readingsPerSecond, setReadingsPerSecond] = useState(0)
 
+  const [steps, setSteps] = useState(0)
+
   // useRef is like a box that keeps the value but doesnt redraw the page when it changes..
   // ref: https://react.dev/reference/react/useRef
   // using it for the stop fn and for counting readings bcoz counting 60 times a sec with useState will redraw 60 times for no reason
   const stopSensorsRef = useRef(null)
   const countRef = useRef(0)
+
+  // the step counter object will live in a ref tooo bcoz it changes every reading
+  const stepCounterRef = useRef(createStepCounter())
 
   async function turnOnSensors() {
     // this has to be called directly from the button click ((iphone rule from sensors.js)
@@ -46,7 +53,19 @@ function SensorsPage() {
     stopSensorsRef.current = startSensors(function (newReading) {
       setReading(newReading)
       countRef.current = countRef.current + 1
+
+      // giving every reading to the step counter tooo
+      // only redrawing the number when a new step actually happens and not 60 times a sec
+      const newStep = addReading(stepCounterRef.current, newReading)
+      if (newStep) {
+        setSteps(stepCounterRef.current.steps)
+      }
     })
+  }
+  // reset = just make a brand new counter object n thats the easiest way!
+  function resetSteps() {
+    stepCounterRef.current = createStepCounter()
+    setSteps(0)
   }
 
   // this will run only once when page will open; empty [] at the end
@@ -81,6 +100,13 @@ function SensorsPage() {
         <p>
           Readings per second: <b>{readingsPerSecond}</b>
         </p>
+      </div>
+
+      <div className="card">
+        <h3>Step counter</h3>
+        <p className="big-number">{steps} steps</p>
+        <button onClick={resetSteps}>Reset</button>
+        <p>Test: put the phone in your front pocket, walk exactly 100 steps, then compare.</p>
       </div>
 
       {reading && (
