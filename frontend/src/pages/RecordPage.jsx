@@ -6,12 +6,14 @@
 - pick a participant code (P01, P02... NEEVVVEERRRR real names, privacy!!!), a label n how long
 - press start -> collect every reading into a list for that many seconds
 - then download it as csv and thennn upload to supabase..
+----- making a change here.. we are keeping download option as a backup but the db setup is done so updating the page with it..
 - time starts from 0 for every recording so all files look the same and phyphox also does this..
 labels are from our data collection plan in the proposal
 */
 import { useEffect, useRef, useState } from 'react'
 import { downloadCsv, makeCsv } from '../csv.js'
 import { askForSensorPermission, startSensors } from '../sensors.js'
+import { uploadRecording } from '../supabase.js'
 
 // what we can record.. 7 gestures, none, pocket activities, placements
 const LABELS = [
@@ -105,6 +107,18 @@ function RecordPage() {
     downloadCsv(fileName, csvText)
   }
 
+  // uploading to supabase.. if it fails the msg tells why n the csv can still be downloaded
+  async function upload() {
+    setMessage('Uploading...')
+    const csvText = makeCsv(readingsRef.current)
+    const result = await uploadRecording(participant, label, seconds, csvText, readingsRef.current.length)
+    if (result === 'ok') {
+      setMessage('Saved to the database')
+    } else {
+      setMessage(result + ' You can still press Download CSV.')
+    }
+  }
+
   // if we leave the page while recording, stopping everything
   useEffect(function () {
     return function () {
@@ -155,6 +169,7 @@ function RecordPage() {
         <div className="card">
           <h3>Save this recording</h3>
           <button onClick={download}>Download CSV</button>
+          <button onClick={upload}>Upload to database</button>
         </div>
       )}
     </div>
