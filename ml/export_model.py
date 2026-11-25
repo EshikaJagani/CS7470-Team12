@@ -1,4 +1,4 @@
-# export_model.py
+# export_model.py - Eshika
 # training the final model on ALL 24 people n saving it for the server
 # running it from the ml folder:  python export_model.py
 # so this will gen the file activity_model.pkl
