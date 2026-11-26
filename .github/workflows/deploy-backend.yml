@@ -1,0 +1,53 @@
+# this file will test the server and put it on azure.. it will run by itself every time something in backend folder is merged into main
+# if a test fails, nothing is deployed nd the older version keeps running so our demo will never breaks bcoz of any bad merge!!!
+
+# tasks to do:
+# create secret variables on github..
+# add ref saying taking help from my older projects..
+# clean the comments and then commit
+# start p2 after this
+
+# main idea:
+# since pytest is passing tests Jason and i created a Web App in App Services in azure and uploaded backend folder to it
+# the azure app name is a repo variable n not secret and the publish profile is a repo secret n works like a password..
+# for this yml file, i took help from my past projects
+# ref1: https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-variables
+# ref2: https://github.com/actions/setup-python
+# ref3: https://github.com/Azure/webapps-deploy
+
+name: Deploy backend
+
+on:
+  push:
+    branches: [main]
+    # only when backend stuff changes, so frontend merges dont redeploy the server for nothing
+    paths: ["backend/**", ".github/workflows/deploy-backend.yml"]
+  # adds a "Run workflow" button in the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Install Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install packages
+        working-directory: backend
+        run: pip install -r requirements.txt
+
+      - name: Run the tests
+        working-directory: backend
+        run: pytest
+
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: backend

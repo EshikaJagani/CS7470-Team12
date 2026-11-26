@@ -386,7 +386,7 @@ return (
           <div>
             <p className="success">You finished the ride in {result.total_seconds} seconds!</p>
             <p>
-              False triggers: {result.false_triggers} · Wrong buttons: {result.wrong_buttons}
+              False triggers: {result.false_triggers}; Wrong buttons: {result.wrong_buttons}
             </p>
             <p>{saveMessage}</p>
           </div>
