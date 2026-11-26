@@ -75,3 +75,18 @@ button:disabled {
   font-weight: bold;
   margin: 8px 0;
 }
+
+/* hold bar for feedback A: fills up while you hold a tilt */
+.hold-bar {
+  height: 12px;
+  background-color: #eeeeee;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.hold-fill {
+  height: 100%;
+  background-color: var(--green);
+}
+
