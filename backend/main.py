@@ -44,7 +44,7 @@ app = FastAPI(title='MotionQuest API')
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:5173', 'https://team12-motionquest.github.io'],
+    allow_origins=['http://localhost:5173', 'http://localhost:4173','https://eshikajagani.github.io'],
     allow_methods=['*'],
     allow_headers=['*'],
 )
@@ -113,9 +113,15 @@ def predict(window: Window):
     # predict_proba wants a LIST of windows, so [features].. n [0] = the answer for our only window
     chances = model.predict_proba([features])[0]
     best = chances.argmax()
+
+    # dictionary that pairs each class name with its chance, rounded to 3 decimals
+    chances_dict = {}
+    for name, chance in zip(model.classes_, chances):
+        chances_dict[str(name)] = round(float(chance), 3)
  
     return {
         # str() n float() bcoz numpy types cant be turned into json
         'activity': str(model.classes_[best]),
         'confidence': round(float(chances[best]), 3),
+        'chances': chances_dict
     }
