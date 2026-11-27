@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage.jsx'
 import PlayPage from './pages/PlayPage.jsx'
 import SensorsPage from './pages/SensorsPage.jsx'
 import RecordPage from './pages/RecordPage.jsx'
+import QuestionnairePage from './pages/QuestionnairePage.jsx'
 
 function App() {
   // this is representing which page is showing right now: 'home', 'play' or 'sensors' or 'record'
@@ -18,6 +19,7 @@ function App() {
           <button onClick={() => setPage('play')}>Play</button>
           <button onClick={() => setPage('sensors')}>Sensors</button>
           <button onClick={() => setPage('record')}>Record</button>
+          <button onClick={() => setPage('survey')}>Survey</button>
         </nav>
       </header>
 
@@ -26,6 +28,7 @@ function App() {
         {page === 'play' && <PlayPage />}
         {page === 'sensors' && <SensorsPage />}
         {page === 'record' && <RecordPage />}
+        {page === 'survey' && <QuestionnairePage/>}
       </main>
 
       <footer className="footer">CS 7470 - Team 12</footer>

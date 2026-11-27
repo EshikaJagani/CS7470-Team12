@@ -90,3 +90,61 @@ button:disabled {
   background-color: var(--green);
 }
 
+.survey-page .survey-fields,
+.survey-page .question {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.survey-page .question {
+  margin-block: 1rem;
+  padding-block-end: .75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.survey-page .likert {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+  margin-block-start: .5rem;
+}
+
+.survey-page .likert-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #777;
+  border-radius: 50%;
+  background: white;
+  color: var(--dark-blue);
+}
+
+.survey-page .likert-button.chosen {
+  background: var(--dark-blue);
+  color: white;
+}
+
+.survey-page .slider,
+.survey-page .comment {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: .5rem 0;
+}
+
+.survey-page .slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: .875rem;
+}
+
+.survey-page .comment {
+  font-size: 16px;
+}
+
+.survey-page button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
