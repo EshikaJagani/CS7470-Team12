@@ -3,6 +3,11 @@ import LikertScale from '../components/LikertScale.jsx'
 import { SUS_QUESTIONS, TLX_QUESTIONS, susScore, tlxScore } from '../questions.js'
 import { getParticipant, getFeedbackStyle, saveQuestionnaire } from '../session.js'
 
+// Reference: Managing form input and submission with state — https://react.dev/learn/reacting-to-input-with-state
+// Reference: Rendering questionnaire items with map — https://react.dev/learn/rendering-lists
+// Reference: Updating answer arrays in state — https://react.dev/learn/updating-arrays-in-state
+// Reference: NASA-TLX range inputs — https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range
+// Reference: Optional comment textarea — https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
 export default function QuestionnairePage() {
   const [susAnswers, setSusAnswers] = useState(() => SUS_QUESTIONS.map(() => null))
   const [tlxAnswers, setTlxAnswers] = useState(() => TLX_QUESTIONS.map(() => 50))

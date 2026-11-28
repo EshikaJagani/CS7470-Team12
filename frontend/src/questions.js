@@ -1,3 +1,5 @@
+// Reference: Brooke, J. (1996). SUS: A quick and dirty usability scale. In Usability Evaluation in Industry.
+// Free full text with the questionnaire and scoring: https://hci-studies.org/methods-and-measures/downloads/SUS_Brooke1996.pdf
 export const SUS_QUESTIONS = [
   'I think that I would like to play this game frequently.',
   'I found the game unnecessarily complex.',
@@ -11,6 +13,8 @@ export const SUS_QUESTIONS = [
   'I needed to learn a lot of things before I could get going with this game.',
 ]
 
+// Reference: Hart, S. G., & Staveland, L. E. (1988). Development of NASA-TLX (Task Load Index): Results of empirical and theoretical research.
+// NASA's overview of the six workload dimensions and free publication download: https://www.nasa.gov/human-systems-integration-division/nasa-task-load-index-tlx/
 export const TLX_QUESTIONS = [
   {
     name: 'Mental demand',
