@@ -7,6 +7,7 @@ from fastapi.testclient import TestClient
 from main import app
 
 # a pretend browser that talks to our server without starting it
+# Reference: FastAPI- testing with TestClient — https://fastapi.tiangolo.com/tutorial/testing/#using-testclient
 client = TestClient(app)
 
 def test_home_page_works():
