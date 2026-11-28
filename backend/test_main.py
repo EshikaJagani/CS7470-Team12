@@ -7,6 +7,7 @@ from fastapi.testclient import TestClient
 from main import app
 
 # a pretend browser that talks to our server without starting it
+# Reference: FastAPI- testing with TestClient — https://fastapi.tiangolo.com/tutorial/testing/#using-testclient
 client = TestClient(app)
 
 def test_home_page_works():
@@ -23,3 +24,20 @@ def test_health_says_ok():
 def test_model_is_loaded():
     # if this fails: the model file is missing.. run ml/export_model.py n git pull
     assert client.get('/health').json()['model_loaded'] is True
+
+def test_predict_returns_five_chances():
+    axes = ['lx', 'ly', 'lz', 'gx', 'gy', 'gz']
+    # window of 128 zeroes for each of the axes
+    window_payload = {axis: [0.0] * 128 for axis in axes}
+
+    response = client.post('/predict', json=window_payload)
+    assert response.status_code == 200
+
+    response_body = response.json()
+
+    chances = response_body['chances']
+    # check that chances has 5 entries
+    assert len(chances) == 5
+
+    # they add up to 1 within 0.01
+    assert abs(sum(chances.values()) - 1) <= 0.01
